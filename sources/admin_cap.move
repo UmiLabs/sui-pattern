@@ -46,6 +46,7 @@ module sui_pattern::admin_cap {
     #[test_only] use sui::test_scenario::{Self as test, ctx};
 
     #[test_only] const ALICE: address = @0xA11CE;
+    #[test_only] const BOB: address = @0xB0B;
 
 
     #[test]

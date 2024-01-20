@@ -4,3 +4,22 @@
 
 @test:
     sui move test
+
+@publish:
+    sui client publish --gas-budget 123456789 --json | tee publish-result.json 2> /dev/null
+
+pick-package-id:
+    @jq -r '.objectChanges[] | select(.type == "published") | .packageId' publish-result.json
+
+pick-upgrade-cap-id:
+    @jq -r '.objectChanges[] | select(.objectType == "0x2::package::UpgradeCap") | .objectId' publish-result.json
+
+upgrade:
+    sui client upgrade --gas-budget 123456789 --upgrade-capability `just pick-upgrade-cap-id` --json
+
+pub-and-pick: publish pick-package-id
+
+
+create-key:
+    cd keys
+    sui keytool generate ed25519
