@@ -64,15 +64,15 @@ module counter::counter {
     fun test_admin_cap() {
         let mut scenario = test::begin(@0x1);
         let test = &mut scenario;
-        {
+        test.next_tx(ALICE); {
             create(vector[ALICE], test.ctx());
-        }; test.next_tx(ALICE);
-        {
+        };
+        test.next_tx(ALICE); {
             let mut counter = test.take_shared<Counter>();
             counter.increment(test.ctx());
             test::return_shared(counter);
-        }; test.next_tx(ALICE);
-        {
+        };
+        test.next_tx(ALICE); {
             let counter = test.take_shared<Counter>();
             assert!(counter.count() == 1, 2);
             test::return_shared(counter);

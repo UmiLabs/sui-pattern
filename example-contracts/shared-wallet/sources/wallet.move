@@ -50,17 +50,18 @@ module shared_wallet::wallet {
         let mut scenario = test::begin(@0x1);
         let test = &mut scenario;
         // Ready a shared wallet for Alice and Bob
-        {
+        test.next_tx(ALICE); {
             create(allow_list, test.ctx());
-        }; test.next_tx(ALICE);
+        };
         // Alice trnasfers the goods to the wallet
-        {
+        test.next_tx(ALICE); {
             let wallet = test.take_shared<Wallet>();
             let goods = goods::new(42, test.ctx());
             transfer::public_transfer(goods, object::id_address(&wallet));
             test::return_shared(wallet);
         }; test.next_tx(ALICE);
         // TODO: EVE tries to take the goods from the wallet
+        //
         test::end(scenario);
     }
 }
