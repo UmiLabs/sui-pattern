@@ -4,6 +4,9 @@ import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 
 export default defineConfig({
+  test: {
+    includeSource: ['src/**/*.{js,ts}', 'tests/**/*.{js,ts}'],
+  },
   plugins: [
     dts({
       insertTypesEntry: true,

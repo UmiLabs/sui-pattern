@@ -77,7 +77,7 @@ const { adminCap } = await (async () => {
     ids: objectIds,
     options: {
       showType: true,
-    }
+    },
   });
   const adminCap = result.find((e) => e?.data?.type && isAdminCap(e.data.type))!;
   return { adminCap };

@@ -40,21 +40,21 @@ module counter::admin_cap {
         let mut scenario = test::begin(@0x1);
         let test = &mut scenario;
         {
-            create_counter(vector[ALICE], ctx(test));
-        }; test::next_tx(test, ALICE);
+            create_counter(vector[ALICE], test.ctx());
+        }; test.next_tx(ALICE);
         {
             let cap = test.take_shared<SharedCap<Counter>>();
             let mut counter = test.take_shared<Counter>();
-            increment_counter(&cap, &mut counter, ctx(test));
+            increment_counter(&cap, &mut counter, test.ctx());
 
             test::return_shared(counter);
             test::return_shared(cap);
-        }; test::next_tx(test, ALICE);
+        }; test.next_tx(ALICE);
         {
             let counter = test.take_shared<Counter>();
             assert!(counter.count() == 1, 2);
             test::return_shared(counter);
-        }; test::next_tx(test, ALICE);
+        }; test.next_tx(ALICE);
         test::end(scenario);
     }
 }
