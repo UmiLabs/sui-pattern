@@ -80,12 +80,12 @@ module shared_cap::admin_cap {
         let mut scenario = test::begin(@0x1);
         let test = &mut scenario;
         {
-            create_counter(vector[ALICE], ctx(test));
+            create_counter(vector[ALICE], test.ctx());
         }; test::next_tx(test, ALICE);
         {
             let cap = test.take_shared<AdminCap>();
             let mut counter = test.take_shared<Counter>();
-            increment_counter(&cap, &mut counter, ctx(test));
+            increment_counter(&cap, &mut counter, test.ctx());
 
             test::return_shared(counter);
             test::return_shared(cap);

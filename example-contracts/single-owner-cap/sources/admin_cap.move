@@ -64,7 +64,7 @@ module single_owner_cap::admin_cap {
         let mut scenario = test::begin(@0x1);
         let test = &mut scenario;
         {
-            create_counter(ALICE, ctx(test));
+            create_counter(ALICE, test.ctx());
         }; test::next_tx(test, ALICE);
         {
             let mut counter = test.take_shared<Counter>();
