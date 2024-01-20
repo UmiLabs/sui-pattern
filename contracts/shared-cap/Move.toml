@@ -1,13 +1,11 @@
 [package]
 edition = "2024.alpha"
 name = "SharedCap"
-published-at = "0x64929b00b1d7a54b21e3f03218aebaa7e6ba3f3328e81ab086df085d7ec47300"
-
+published-at = "0x32693b2dc0c8bde4c246349d8bb39a460cc9ca1a5bc625f08965d1c7cedde6bb"
 
 [dependencies]
 Sui = {git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "framework/testnet"}
 
 [addresses]
-// shared_cap = "0x0"
-shared_cap = "0x64929b00b1d7a54b21e3f03218aebaa7e6ba3f3328e81ab086df085d7ec47300"
-
+# shared_cap = "0x0"
+shared_cap = "0x32693b2dc0c8bde4c246349d8bb39a460cc9ca1a5bc625f08965d1c7cedde6bb"

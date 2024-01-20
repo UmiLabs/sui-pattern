@@ -1,4 +1,4 @@
-module shared_cap::shared_cap {
+module counter::shared_cap {
     use sui::object::{Self, ID, UID};
     use sui::transfer;
     use sui::tx_context::{TxContext};
