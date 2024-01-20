@@ -1,0 +1,9 @@
+[config]
+# will be set to mainnet by default if omitted
+# rpc = "https://fullnode.mainnet.sui.io:443"
+rpc = "https://fullnode.testnet.sui.io:443"
+# rpc = "http://127.0.0.1:9000"
+
+[packages]
+Sui = {git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "testnet"}
+SuiPattern = {id = "0xa284d5399d34a4fc727a7d03f63b54cf6a57474c9fa4565783c125d637206de8"}
