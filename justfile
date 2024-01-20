@@ -1,7 +1,6 @@
 
 create-key:
-    cd keys
-    sui keytool generate ed25519
+    cd keys && sui keytool generate ed25519
 
 
 # sui

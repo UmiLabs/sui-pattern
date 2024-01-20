@@ -5,5 +5,6 @@ rpc = "https://fullnode.testnet.sui.io:443"
 # rpc = "http://127.0.0.1:9000"
 
 [packages]
+SharedWallet = {id = "0x2a5c6790608eb9523c962ad80cb58a7439eb2ed4b5e38a9c229b5a5379d37704"}
 Sui = {git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "testnet"}
 SuiPattern = {id = "0x7dfed8f8ed1527f05a667eacc5c6ca2680c46102262488047a8370906f6c4147"}
