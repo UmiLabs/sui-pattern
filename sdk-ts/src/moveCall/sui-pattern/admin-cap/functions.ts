@@ -2,6 +2,13 @@ import { PUBLISHED_AT } from '..';
 import { ObjectArg, obj, pure } from '../../_framework/util';
 import { TransactionArgument, TransactionBlock } from '@mysten/sui.js/transactions';
 
+export function count(txb: TransactionBlock, counter: ObjectArg) {
+  return txb.moveCall({
+    target: `${PUBLISHED_AT}::admin_cap::count`,
+    arguments: [obj(txb, counter)],
+  });
+}
+
 export function newAdminCap(txb: TransactionBlock, counter: ObjectArg) {
   return txb.moveCall({
     target: `${PUBLISHED_AT}::admin_cap::new_admin_cap`,

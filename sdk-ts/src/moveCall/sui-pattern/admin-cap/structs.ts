@@ -9,7 +9,7 @@ export function isCounter(type: Type): boolean {
   type = compressSuiType(type);
   return (
     type ===
-    '0xa284d5399d34a4fc727a7d03f63b54cf6a57474c9fa4565783c125d637206de8::admin_cap::Counter'
+    '0x7dfed8f8ed1527f05a667eacc5c6ca2680c46102262488047a8370906f6c4147::admin_cap::Counter'
   );
 }
 
@@ -20,7 +20,7 @@ export interface CounterFields {
 
 export class Counter {
   static readonly $typeName =
-    '0xa284d5399d34a4fc727a7d03f63b54cf6a57474c9fa4565783c125d637206de8::admin_cap::Counter';
+    '0x7dfed8f8ed1527f05a667eacc5c6ca2680c46102262488047a8370906f6c4147::admin_cap::Counter';
   static readonly $numTypeParams = 0;
 
   static get bcs() {
@@ -81,7 +81,7 @@ export function isAdminCap(type: Type): boolean {
   type = compressSuiType(type);
   return (
     type ===
-    '0xa284d5399d34a4fc727a7d03f63b54cf6a57474c9fa4565783c125d637206de8::admin_cap::AdminCap'
+    '0x7dfed8f8ed1527f05a667eacc5c6ca2680c46102262488047a8370906f6c4147::admin_cap::AdminCap'
   );
 }
 
@@ -92,7 +92,7 @@ export interface AdminCapFields {
 
 export class AdminCap {
   static readonly $typeName =
-    '0xa284d5399d34a4fc727a7d03f63b54cf6a57474c9fa4565783c125d637206de8::admin_cap::AdminCap';
+    '0x7dfed8f8ed1527f05a667eacc5c6ca2680c46102262488047a8370906f6c4147::admin_cap::AdminCap';
   static readonly $numTypeParams = 0;
 
   static get bcs() {
