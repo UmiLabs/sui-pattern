@@ -15,6 +15,10 @@ module sui_pattern::admin_cap {
         counter_id: ID,
     }
 
+    public fun count(counter: &Counter): u64 {
+        counter.count
+    }
+
     fun new_admin_cap(counter: &Counter, ctx: &mut TxContext): AdminCap {
         AdminCap {
             id: object::new(ctx),
@@ -42,8 +46,14 @@ module sui_pattern::admin_cap {
         counter.count = counter.count + 1;
     }
 
-
+    #[test_only] use std::debug;
     #[test_only] use sui::test_scenario::{Self as test, ctx};
+
+    #[test_only]
+    public fun print(counter: &Counter) {
+        debug::print(&counter.count);
+    }
+
 
     #[test_only] const ALICE: address = @0xA11CE;
     #[test_only] const BOB: address = @0xB0B;
@@ -55,16 +65,21 @@ module sui_pattern::admin_cap {
         let test = &mut scenario;
         {
             create_counter(ALICE, ctx(test));
-        };
-        test::next_tx(test, ALICE);
+        }; test::next_tx(test, ALICE);
         {
-            let mut counter = test::take_shared<Counter>(test);
-            let cap = test::take_from_address<AdminCap>(test, ALICE);
-            increment(&mut counter, &cap);
+            let mut counter = test.take_shared<Counter>();
+            let cap = test.take_from_address<AdminCap>(ALICE);
+            counter.increment(&cap);
 
             test::return_to_address<AdminCap>(ALICE, cap);
             test::return_shared(counter);
-        };
+        }; test::next_tx(test, ALICE);
+        {
+            let counter = test.take_shared<Counter>();
+            counter.print();
+            assert!(counter.count == 1, 2);
+            test::return_shared(counter);
+        }; test::next_tx(test, ALICE);
         test::end(scenario);
     }
 }

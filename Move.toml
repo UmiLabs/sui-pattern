@@ -1,6 +1,7 @@
 [package]
 edition = "2024.alpha"
 name = "SuiPattern"
+published-at = "0x7dfed8f8ed1527f05a667eacc5c6ca2680c46102262488047a8370906f6c4147"
 
 [dependencies]
 Sui = {git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "testnet"}

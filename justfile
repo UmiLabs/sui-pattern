@@ -1,4 +1,11 @@
 
+create-key:
+    cd keys
+    sui keytool generate ed25519
+
+
+# sui
+
 @build:
     sui move build
 
@@ -19,7 +26,8 @@ upgrade:
 
 pub-and-pick: publish pick-package-id
 
-
-create-key:
-    cd keys
-    sui keytool generate ed25519
+# sdk-ts
+@build-ts:
+    cd sdk-ts
+    bun gen:sui
+    bun run build
