@@ -41,7 +41,7 @@ module counter::admin_cap {
         let test = &mut scenario;
         {
             create_counter(vector[ALICE], test.ctx());
-        }; test::next_tx(test, ALICE);
+        }; test.next_tx(ALICE);
         {
             let cap = test.take_shared<SharedCap<Counter>>();
             let mut counter = test.take_shared<Counter>();
@@ -49,12 +49,12 @@ module counter::admin_cap {
 
             test::return_shared(counter);
             test::return_shared(cap);
-        }; test::next_tx(test, ALICE);
+        }; test.next_tx(ALICE);
         {
             let counter = test.take_shared<Counter>();
             assert!(counter.count() == 1, 2);
             test::return_shared(counter);
-        }; test::next_tx(test, ALICE);
+        }; test.next_tx(ALICE);
         test::end(scenario);
     }
 }

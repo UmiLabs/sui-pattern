@@ -65,7 +65,7 @@ module single_owner_cap::admin_cap {
         let test = &mut scenario;
         {
             create_counter(ALICE, test.ctx());
-        }; test::next_tx(test, ALICE);
+        }; test.next_tx(ALICE);
         {
             let mut counter = test.take_shared<Counter>();
             let cap = test.take_from_address<AdminCap>(ALICE);
@@ -73,13 +73,13 @@ module single_owner_cap::admin_cap {
 
             test::return_to_address<AdminCap>(ALICE, cap);
             test::return_shared(counter);
-        }; test::next_tx(test, ALICE);
+        }; test.next_tx(ALICE);
         {
             let counter = test.take_shared<Counter>();
             counter.print();
             assert!(counter.count == 1, 2);
             test::return_shared(counter);
-        }; test::next_tx(test, ALICE);
+        }; test.next_tx(ALICE);
         {
             let mut counter = test.take_shared<Counter>();
             let cap = test.take_from_address<AdminCap>(ALICE);
@@ -87,13 +87,13 @@ module single_owner_cap::admin_cap {
 
             test::return_to_address<AdminCap>(ALICE, cap);
             test::return_shared(counter);
-        }; test::next_tx(test, BOB);
+        }; test.next_tx(BOB);
         {
             let counter = test.take_shared<Counter>();
             counter.print();
             assert!(counter.count == 2, 2);
             test::return_shared(counter);
-        }; test::next_tx(test, BOB);
+        }; test.next_tx(BOB);
         test::end(scenario);
     }
 }
