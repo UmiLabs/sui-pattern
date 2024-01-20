@@ -4,7 +4,7 @@ name = "counter"
 
 [dependencies]
 SharedCap = {local = "../../contracts/shared-cap"}
-Sui = {git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "framework/testnet"}
+Sui = {git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "testnet"}
 
 [addresses]
 counter = "0x0"
