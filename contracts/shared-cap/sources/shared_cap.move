@@ -1,19 +1,19 @@
 module shared_cap::shared_cap {
     use sui::object::{Self, ID, UID};
     use sui::transfer;
-    use sui::vec_set::{Self, VecSet};
     use sui::tx_context::{TxContext};
+    use sui::vec_set::{Self, VecSet};
     use std::vector;
 
     const E_INVALID_CAP: u64 = 1;
 
-    public struct SharedCap<phantom T> has key {
+    public struct SharedCap<phantom T> has key, store {
         id: UID,
         for: ID,
         allow_list: VecSet<address>,
     }
 
-    fun new<T>(for: ID, mut address_list: vector<address>, ctx: &mut TxContext): SharedCap<T> {
+    public fun new<T: key>(for: &T, mut address_list: vector<address>, ctx: &mut TxContext): SharedCap<T> {
         let mut allow_list = vec_set::empty();
         let mut i = 0;
         let len = vector::length(&address_list);
@@ -28,12 +28,12 @@ module shared_cap::shared_cap {
 
         SharedCap<T> {
             id: object::new(ctx),
-            for,
+            for: object::id(for),
             allow_list,
         }
     }
 
-    public fun create<T>(for: ID, address_list: vector<address>, ctx: &mut TxContext) {
+    public fun create<T: key>(for: &T, address_list: vector<address>, ctx: &mut TxContext) {
         let cap = new<T>(for, address_list, ctx);
         transfer::share_object(cap);
     }
