@@ -1,0 +1,9 @@
+[package]
+edition = "2024.alpha"
+name = "ShouldFails"
+
+[dependencies]
+Sui = {git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "testnet"}
+
+[addresses]
+should_fails = "0x0"

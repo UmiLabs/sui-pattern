@@ -1,4 +1,4 @@
-import { SuiClient, SuiTransactionBlockResponse, getFullnodeUrl } from '@mysten/sui.js/client';
+import { SuiClient, SuiTransactionBlockResponse, SuiTransactionBlockResponseOptions, getFullnodeUrl } from '@mysten/sui.js/client';
 import { Ed25519Keypair } from '@mysten/sui.js/keypairs/ed25519';
 import { TransactionBlock } from '@mysten/sui.js/transactions';
 import { fromB64 } from '@mysten/sui.js/utils';
@@ -11,16 +11,32 @@ export const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve
 export const signAndExecuteTxb = async (props: {
   transactionBlock: TransactionBlock;
   signer: Keypair;
+  options?: SuiTransactionBlockResponseOptions;
 }) => {
   const result: SuiTransactionBlockResponse = await client.signAndExecuteTransactionBlock({
     requestType: 'WaitForLocalExecution',
     options: {
       showObjectChanges: true,
       showEvents: true,
+      ...props.options
     },
     ...props,
   });
   return result;
+};
+
+export const dryRun = async (
+  txb: TransactionBlock,
+  props: {
+    sender: string;
+  },
+) => {
+  txb.setSender(props.sender);
+  const b = await txb.build({ client });
+  const r = await client.dryRunTransactionBlock({
+    transactionBlock: b,
+  });
+  return r;
 };
 
 export const ALICE = Ed25519Keypair.fromSecretKey(
@@ -36,4 +52,3 @@ export const EVE = Ed25519Keypair.fromSecretKey(
 console.log('ALICE:', ALICE.toSuiAddress());
 console.log('BOB:', BOB.toSuiAddress());
 console.log('EVE:', EVE.toSuiAddress());
-

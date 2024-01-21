@@ -1,0 +1,11 @@
+[package]
+edition = "2024.alpha"
+name = "SharedCapWithAllowlist"
+published-at = "0x32693b2dc0c8bde4c246349d8bb39a460cc9ca1a5bc625f08965d1c7cedde6bb"
+
+[dependencies]
+Sui = {git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "testnet"}
+
+[addresses]
+# shared_cap = "0x0"
+shared_cap = "0x32693b2dc0c8bde4c246349d8bb39a460cc9ca1a5bc625f08965d1c7cedde6bb"

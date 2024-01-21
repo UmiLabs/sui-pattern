@@ -5,7 +5,6 @@ import { new_ } from 'src/moveCall/shared-wallet/goods/functions';
 import { isGoods } from 'src/moveCall/shared-wallet/goods/structs';
 import { ALICE, BOB, EVE, signAndExecuteTxb } from './common';
 
-
 // Alice creates a shared wallet for Alice and Bob.
 const { wallet } = await (async () => {
   const txb = new TransactionBlock();
@@ -14,13 +13,11 @@ const { wallet } = await (async () => {
   const result = await signAndExecuteTxb({ transactionBlock: txb, signer: ALICE });
   console.log(JSON.stringify(result, null, 2));
 
-
   return {
     wallet: result.objectChanges?.find((obj: any) => isWallet(obj?.objectType))!,
   };
 })();
 console.log({ wallet });
-
 
 // Alice creates a goods and sends it to the shared wallet.
 const { goods } = await (async () => {
@@ -42,7 +39,6 @@ const store = {
   receiving: goods.objectId,
 };
 
-
 // EVE tries to receive the goods but fails.
 {
   const txb = new TransactionBlock();
@@ -52,10 +48,10 @@ const store = {
   });
   txb.transferObjects([goods], EVE.toSuiAddress());
 
-  await signAndExecuteTxb({ transactionBlock: txb, signer: EVE })
-  .catch((err) => { console.log(err); });
+  await signAndExecuteTxb({ transactionBlock: txb, signer: EVE }).catch((err) => {
+    console.log(err);
+  });
 }
-
 
 // BOB receives the goods from the shared wallet.
 {

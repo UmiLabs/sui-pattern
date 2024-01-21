@@ -1,3 +1,34 @@
+# https://docs.sui.io/guides/developer/getting-started/sui-environment#move-ides-and-plugins
+install-move-analyzer:
+    cargo install --force --git https://github.com/move-language/move move-analyzer --branch sui-move --features "address32"
+
+install-sui-client-gen:
+    cargo install --locked --git https://github.com/kunalabs-io/sui-client-gen.git --tag v0.2.0
+
+install-sui-test-validator:
+    cargo install --git https://github.com/mystenlabs/sui --branch testnet sui-test-validator
+
+install-sui:
+    brew install mystenlabs/tap/sui
+
+install-suivm:
+    cargo install --git https://github.com/origin-byte/suivm
+
+sui-info:
+    sui client envs
+    sui client active-address
+
+sui-add-env NET="testnet":
+    echo NET=devnet, testnet, mainnet
+    sui client new-env --alias {{NET}} --rpc https://fullnode.{{NET}}.sui.io:443
+
+sui-switch ALIAS:
+    sui client envs
+    sui client switch --env {{ALIAS}}
+    sui client envs
+    sui client active-address
+
+
 
 create-key:
     cd keys && sui keytool generate ed25519

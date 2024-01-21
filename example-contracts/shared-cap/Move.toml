@@ -1,9 +1,0 @@
-[package]
-edition = "2024.alpha"
-name = "shared-cap"
-
-[dependencies]
-Sui = {git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "framework/testnet"}
-
-[addresses]
-shared_cap = "0x0"

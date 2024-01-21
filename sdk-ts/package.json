@@ -17,7 +17,7 @@
   },
   "scripts": {
     "build": "vite build",
-    "gen:sui": "bun sui-client-gen && bun fmt",
+    "gen:sui": "rm -rf src/moveCall && bun sui-client-gen && bun fmt",
     "sui-client-gen": "sui-client-gen -m sui-client-gen.toml -o src/moveCall",
     "lint": "biome lint ./src",
     "fmt": "biome format --write ./src ./examples"
