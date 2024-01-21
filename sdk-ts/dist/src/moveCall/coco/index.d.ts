@@ -1,2 +1,0 @@
-export declare const PACKAGE_ID = "0x697a0d0c7719dc30d67d7d9debda8fe2f983217ed66aa25e6a6f5d3e3b962e91";
-export declare const PUBLISHED_AT = "0x697a0d0c7719dc30d67d7d9debda8fe2f983217ed66aa25e6a6f5d3e3b962e91";
