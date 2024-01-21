@@ -2,6 +2,7 @@ module shared_cap::shared_cap {
     use sui::event;
     use sui::object::{Self, ID, UID};
     use sui::table::{Self, Table};
+    use sui::transfer;
     use sui::tx_context::{TxContext};
 
     use shared_cap::regulated_pointer::{Self, RegulatedPointer};
@@ -11,13 +12,13 @@ module shared_cap::shared_cap {
     const E_NOT_FOUND_POINTER: u64 = 0x0102;
 
     /// SharedCap is assumed to be a shared object or owned/stored by a shared object
-    public struct SharedCap<phantom T: key> has key, store {
+    public struct SharedCap<phantom T: key> has key {
         id: UID,
         target_id: ID, // ojbect::id(&T)
         pointer_table: Table<address, ID> // Holder -> Pointer
     }
 
-    public fun new<T: key>(target: &T, ctx: &mut TxContext): SharedCap<T> {
+    fun new<T: key>(target: &T, ctx: &mut TxContext): SharedCap<T> {
         let mut self = SharedCap<T> {
             id: object::new(ctx),
             target_id: object::id(target),
@@ -29,6 +30,13 @@ module shared_cap::shared_cap {
         self.pointer_table.add(new_holder, pointer_id);
 
         self
+    }
+
+    public entry fun create<T: key>(target: &T, ctx: &mut TxContext): ID {
+        let self = new(target, ctx);
+        let id = object::id(&self);
+        transfer::share_object(self);
+        id
     }
 
     public struct EventHolderInfo has copy, drop {

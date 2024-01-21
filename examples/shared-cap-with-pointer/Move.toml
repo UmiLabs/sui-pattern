@@ -1,7 +1,7 @@
 [package]
 edition = "2024.alpha"
 name = "counter"
-published-at = "0xb785402c88e199ac9018e621becc2c3e7e799bc6b5e9284f861aef480ddf84c2"
+published-at = "0x7834ebcdc91698656da64df52f9b323d13b3ee810e64f9193c9a3abb8bd39e34"
 version = "0.1.0"
 
 [dependencies]
