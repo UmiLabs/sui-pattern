@@ -4,6 +4,7 @@ name = "counter"
 version = "0.1.0"
 
 [dependencies]
+SharedCapWithPointer = {local = "../../frameworks/shared-cap-with-pointer"}
 Sui = {git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "testnet"}
 
 [addresses]

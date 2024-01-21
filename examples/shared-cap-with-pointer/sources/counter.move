@@ -6,8 +6,8 @@ module counter::counter {
     use sui::transfer;
     use sui::tx_context::{TxContext};
 
-    use counter::shared_cap::{Self, SharedCap};
-    use counter::regulated_pointer::{Self, RegulatedPointer};
+    use shared_cap::shared_cap::{Self, SharedCap};
+    use shared_cap::regulated_pointer::{Self, RegulatedPointer};
 
 
     public struct Counter has key {

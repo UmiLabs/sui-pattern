@@ -3,6 +3,7 @@ edition = "2024.alpha"
 name = "counter"
 
 [dependencies]
+SharedCapWithAllowlist = {local = "../../frameworks/shared-cap-with-allowlist"}
 Sui = {git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "testnet"}
 
 [addresses]
