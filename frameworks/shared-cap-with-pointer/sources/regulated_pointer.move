@@ -35,6 +35,14 @@ module shared_cap::regulated_pointer {
         id
     }
 
+    public fun refer_to<T: key>(pointer: &RegulatedPointer<T>): ID {
+        pointer.refer_to
+    }
+
+    public fun holder<T: key>(pointer: &RegulatedPointer<T>): address {
+        pointer.holder
+    }
+
     public fun delete<T: key>(pointer: RegulatedPointer<T>) {
         let RegulatedPointer<T> { id, refer_to: _, holder: _ } = pointer;
         object::delete(id);

@@ -1,12 +1,12 @@
 [package]
 edition = "2024.alpha"
 name = "SharedCapWithPointer"
-published-at = "0x1835d6441f03abde363aab090795ac4426ec8cd54e48c3c9525edde462b537ef"
-version = "0.1.0"
+published-at = "0x3a16a431e139f1346e6fb0f361c643d550c21b764202fc591e37f2587d189a68"
+version = "0.1.1"
 
 [dependencies]
 Sui = {git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "testnet"}
 
 [addresses]
 # shared_cap = "0x0"
-shared_cap = "0x1835d6441f03abde363aab090795ac4426ec8cd54e48c3c9525edde462b537ef"
+shared_cap = "0x3a16a431e139f1346e6fb0f361c643d550c21b764202fc591e37f2587d189a68"
