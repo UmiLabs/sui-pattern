@@ -1,0 +1,11 @@
+[package]
+edition = "2024.alpha"
+name = "Alert"
+published-at = "0x6c51a8097017e2a423e6dab49170a5695ca389ac26143c5622a5cfdbbe969ace"
+
+[dependencies]
+Sui = {git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "framework/testnet"}
+
+[addresses]
+# alert = "0x0"
+alert = "0x6c51a8097017e2a423e6dab49170a5695ca389ac26143c5622a5cfdbbe969ace"
