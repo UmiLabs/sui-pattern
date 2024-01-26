@@ -10,6 +10,9 @@ module counter::counter {
     use shared_cap::shared_cap::{Self, SharedCap};
     use shared_cap::regulated_pointer::{Self, RegulatedPointer};
 
+    use counter::exp_coin::{Self, ExpCoin};
+    use counter::quest::{Self, Quest};
+
     const E_INVALID_CAP: u64 = 0x0101;
 
     public struct Counter has key, store {
@@ -35,7 +38,19 @@ module counter::counter {
         self.count
     }
 
-    public fun increment(self: &mut Counter) {
+    public fun increment(self: &mut Counter, quest: &Quest<ExpCoin>, ctx: &mut TxContext) {
         self.count = self.count + 1;
+
+        if (self.count == quest.length()) {
+            exp_coin::mint_to(1, ctx.sender(), ctx);
+        }
+    }
+
+    #[test_only] use std::debug;
+
+    #[test_only]
+    public fun print(counter: &Counter) {
+        debug::print(&counter.count());
     }
 }
+

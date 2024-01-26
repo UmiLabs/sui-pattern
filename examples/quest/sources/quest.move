@@ -14,6 +14,7 @@ module counter::quest {
 
     public struct Quest<phantom T> has key {
         id: UID,
+        title: String,
         length: u64,
     }
 
@@ -44,15 +45,20 @@ module counter::quest {
         cap.check_cap(cap_ptr);
     }
 
-    fun new<T>(ctx: &mut TxContext): Quest<T> {
+    fun new<T>(
+        title: String, length: u64, ctx: &mut TxContext
+    ): Quest<T> {
         Quest {
             id: object::new(ctx),
-            length: 0,
+            title,
+            length,
         }
     }
 
-    public fun create<T>(ctx: &mut TxContext): ID {
-        let mut self = new<T>(ctx);
+    public fun create<T>(
+        title: String, length: u64, ctx: &mut TxContext
+    ): ID {
+        let mut self = new<T>(title, length, ctx);
         let cap_id = shared_cap::create(&self, ctx);
         df::add(&mut self.id, admin_cap_key(), cap_id);
 
