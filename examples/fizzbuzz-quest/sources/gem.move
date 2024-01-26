@@ -40,6 +40,7 @@ module counter::gem {
 
         token::allow(&mut policy, &cap, claim_action(), ctx);
         token::allow(&mut policy, &cap, token::spend_action(), ctx);
+        token::allow(&mut policy, &cap, token::transfer_action(), ctx);
 
         // create and share the GemStore
         transfer::share_object(GemStore {
@@ -68,4 +69,11 @@ module counter::gem {
 
     /// The name of the `buy` action in the `GemStore`.
     public fun claim_action(): String { string::utf8(b"claim") }
+
+
+    #[test_only]
+    public fun init_for_test(ctx: &mut TxContext) {
+        init(GEM {}, ctx);
+    }
+
 }

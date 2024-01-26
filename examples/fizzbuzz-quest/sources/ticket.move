@@ -4,9 +4,10 @@ module counter::ticket {
     use sui::tx_context::{TxContext};
 
 
+    friend counter::quest;
     friend counter::gem;
 
-    public struct Ticket<T> {
+    public struct Ticket<phantom T> {
         id: UID,
         amount: u64,
     }
