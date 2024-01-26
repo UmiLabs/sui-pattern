@@ -51,6 +51,9 @@ module counter::gem {
         token::share_policy(policy);
     }
 
+    /// The name of the `buy` action in the `GemStore`.
+    public fun claim_action(): String { string::utf8(b"claim") }
+
     public fun claim_gems(
         self: &mut GemStore, ticket: Ticket<GEM>, ctx: &mut TxContext
     ): (Token<GEM>, ActionRequest<GEM>) {
@@ -63,9 +66,6 @@ module counter::gem {
 
         (gems, req)
     }
-
-    /// The name of the `buy` action in the `GemStore`.
-    public fun claim_action(): String { string::utf8(b"claim") }
 
 
     #[test_only]

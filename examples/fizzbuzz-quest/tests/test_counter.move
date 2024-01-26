@@ -12,6 +12,7 @@ module counter::test_counter {
     use counter::gem::{Self, GEM, GemStore};
     use counter::ticket::{Self, Ticket};
     use counter::quest;
+    use counter::goods;
 
     const ALICE: address = @0xA11CE;
     const BOB: address = @0xB0B;
@@ -80,10 +81,19 @@ module counter::test_counter {
         };
 
         test.next_tx(BOB); {
-            let gem = test.take_from_address<Token<GEM>>(BOB);
-            debug::print(&gem);
-            assert!(gem.value() == 3, 111);
+            let mut policy = test.take_shared<TokenPolicy<GEM>>();
+            let mut gem = test.take_from_address<Token<GEM>>(BOB);
+            assert!(gem.value() == 30, 1234);
+
+            let pay = gem.split(10, test.ctx());
+            assert!(pay.value() == 10, 1234);
+
+            let (sword, request) = goods::buy_sword(pay, test.ctx());
+            policy.confirm_request_mut(request, test.ctx());
+            transfer::public_transfer(sword, BOB);
+
             test::return_to_address(BOB, gem);
+            test::return_shared(policy);
         };
         test::end(scenario);
     }

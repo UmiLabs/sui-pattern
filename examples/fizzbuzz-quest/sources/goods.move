@@ -1,4 +1,4 @@
-module counter::sword {
+module counter::goods {
     use sui::tx_context::TxContext;
     use sui::object::{Self, UID};
 

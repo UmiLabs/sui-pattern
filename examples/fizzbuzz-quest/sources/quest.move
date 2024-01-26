@@ -11,11 +11,11 @@ module counter::quest {
 
     fun check(counter: &Counter, ctx: &mut TxContext): Option<Ticket<GEM>> {
         if (counter.count() % 15 == 0) {
-            option::some(ticket::new(15, ctx))
-        } else if (counter.count() % 5 == 0) {
-            option::some(ticket::new(5, ctx))
+            option::some(ticket::new(150, ctx))
+        } else if (counter.count() % 50 == 0) {
+            option::some(ticket::new(50, ctx))
         } else if (counter.count() % 3 == 0) {
-            option::some(ticket::new(3, ctx))
+            option::some(ticket::new(30, ctx))
         } else {
             option::none()
         }

@@ -26,3 +26,10 @@ pub-and-pick: publish pick-package-id
     cd sdk-ts
     bun gen:sui
     bun run build
+
+
+install-fswatch:
+    brew install fswatch
+
+watch:
+    fswatch -o sources/ | xargs -I{} sh -c 'clear && sui move build'
