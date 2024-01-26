@@ -1,19 +1,16 @@
 module counter::gem {
     use std::option::none;
     use std::string::{Self, String};
-    use sui::sui::SUI;
-    use sui::transfer;
+
+    use sui::coin::{Self, TreasuryCap};
     use sui::object::{Self, UID};
-    use sui::balance::{Self, Balance};
     use sui::tx_context::{sender, TxContext};
-    use sui::coin::{Self, Coin, TreasuryCap};
+    use sui::transfer;
 
     use sui::token::{Self, Token, ActionRequest};
 
     use counter::ticket::Ticket;
 
-    /// Trying to purchase Gems with an unexpected amount.
-    const EUnknownAmount: u64 = 0;
 
     #[lint_allow(coin_field)]
     /// Gems can be purchased through the `Store`.

@@ -1,6 +1,5 @@
 module counter::ticket {
-    use sui::object::{Self, ID, UID};
-    use sui::transfer;
+    use sui::object::{Self, UID};
     use sui::tx_context::{TxContext};
 
 
@@ -16,7 +15,7 @@ module counter::ticket {
         self.amount
     }
 
-    public fun new<T>(amount: u64, ctx: &mut TxContext): Ticket<T> {
+    public(friend) fun new<T>(amount: u64, ctx: &mut TxContext): Ticket<T> {
         Ticket {
             id: object::new(ctx),
             amount,
@@ -27,6 +26,11 @@ module counter::ticket {
     // public(friend) fun delete<T>(self: Ticket, ctx: &mut TxContext) {
         let Ticket { id, amount: _ } = self;
         object::delete(id);
+    }
+
+    #[test_only]
+    public fun new_for_test<T>(amount: u64, ctx: &mut TxContext): Ticket<T> {
+        new(amount, ctx)
     }
 
 }
