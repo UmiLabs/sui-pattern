@@ -48,7 +48,7 @@ module counter::gem {
         token::share_policy(policy);
     }
 
-    public fun gem_treasury_mut(self: &mut GemStore): &mut TreasuryCap<GEM> {
+    public fun treasury_mut(self: &mut GemStore): &mut TreasuryCap<GEM> {
         &mut self.gem_treasury
     }
 

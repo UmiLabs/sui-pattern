@@ -2,6 +2,7 @@ module counter::ticket {
     use std::option::none;
     use std::string::{Self, String};
 
+    use sui::coin::{Self, TreasuryCap};
     use sui::object::{Self, UID};
     use sui::token::{Self, Token, TokenPolicy, TokenPolicyCap, ActionRequest};
     use sui::tx_context::{TxContext};
@@ -20,7 +21,7 @@ module counter::ticket {
         self.amount
     }
 
-    fun new<T>(amount: u64, ctx: &mut TxContext): Ticket<T> {
+    public(friend) fun new<T>(amount: u64, ctx: &mut TxContext): Ticket<T> {
         Ticket {
             id: object::new(ctx),
             amount,
@@ -50,14 +51,16 @@ module counter::ticket {
     /// The name of the `buy` action in the `GemStore`.
     public fun claim_action(): String { string::utf8(b"claim") }
 
-    public fun claim_gems(
-        gem_store: &mut GemStore, ticket: Ticket<GEM>, ctx: &mut TxContext
-    ): (Token<GEM>, ActionRequest<GEM>) {
+    public fun claim_gems<T>(
+        ticket: Ticket<T>,
+        treasury: &mut TreasuryCap<T>,
+        ctx: &mut TxContext
+    ): (Token<T>, ActionRequest<T>) {
         let amount = ticket.into_amount();
 
         // create custom request and mint some Gems
-        let gems = token::mint(gem_store.gem_treasury_mut(), amount, ctx);
-        let req = token::new_request<GEM>(claim_action(), amount, none(), none(), ctx);
+        let gems = token::mint(treasury, amount, ctx);
+        let req = token::new_request<T>(claim_action(), amount, none(), none(), ctx);
 
         (gems, req)
     }
