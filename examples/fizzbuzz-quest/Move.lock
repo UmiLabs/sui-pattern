@@ -2,25 +2,16 @@
 
 [move]
 version = 0
-manifest_digest = "F4EB089A17B51965F5BEA5D4A53E98480A1A858193C463207EC6B51FF51411FE"
-deps_digest = "3C4103934B1E040BB6B23F1D610B4EF9F2F1166A50A104EADCF77467C004C600"
+manifest_digest = "C2B7D17AB0E07C56A130E9ABC46162932BB56B602148F6A5D90B713BB1E1D1E1"
+deps_digest = "F8BBB0CCB2491CA29A3DF03D6F92277A4F3574266507ACD77214D37ECA3F3082"
 
 dependencies = [
-  { name = "SharedCapWithPointer" },
   { name = "Sui" },
 ]
 
 [[move.package]]
 name = "MoveStdlib"
 source = { git = "https://github.com/MystenLabs/sui.git", rev = "testnet", subdir = "crates/sui-framework/packages/move-stdlib" }
-
-[[move.package]]
-name = "SharedCapWithPointer"
-source = { local = "../../frameworks/shared-cap-with-pointer" }
-
-dependencies = [
-  { name = "Sui" },
-]
 
 [[move.package]]
 name = "Sui"

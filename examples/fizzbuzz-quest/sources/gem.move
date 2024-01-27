@@ -9,8 +9,6 @@ module counter::gem {
 
     use sui::token::{Self, Token, ActionRequest};
 
-    use counter::ticket::Ticket;
-
 
     #[lint_allow(coin_field)]
     /// Gems can be purchased through the `Store`.
@@ -33,11 +31,10 @@ module counter::gem {
         );
 
         // create a `TokenPolicy` for GEMs
-        let (mut policy, cap) = token::new_policy(&treasury_cap, ctx);
+        let (mut policy, policy_cap) = token::new_policy(&treasury_cap, ctx);
 
-        token::allow(&mut policy, &cap, claim_action(), ctx);
-        token::allow(&mut policy, &cap, token::spend_action(), ctx);
-        token::allow(&mut policy, &cap, token::transfer_action(), ctx);
+        policy.allow(&policy_cap, token::spend_action(), ctx);
+        policy.allow(&policy_cap, token::transfer_action(), ctx);
 
         // create and share the GemStore
         transfer::share_object(GemStore {
@@ -47,26 +44,13 @@ module counter::gem {
 
         // deal with `TokenPolicy`, `CoinMetadata` and `TokenPolicyCap`
         transfer::public_freeze_object(coin_metadata);
-        transfer::public_transfer(cap, sender(ctx));
+        transfer::public_transfer(policy_cap, ctx.sender());
         token::share_policy(policy);
     }
 
-    /// The name of the `buy` action in the `GemStore`.
-    public fun claim_action(): String { string::utf8(b"claim") }
-
-    public fun claim_gems(
-        self: &mut GemStore, ticket: Ticket<GEM>, ctx: &mut TxContext
-    ): (Token<GEM>, ActionRequest<GEM>) {
-        let amount = ticket.amount();
-
-        // create custom request and mint some Gems
-        let gems = token::mint(&mut self.gem_treasury, amount, ctx);
-        let req = token::new_request(claim_action(), amount, none(), none(), ctx);
-        ticket.delete();
-
-        (gems, req)
+    public fun gem_treasury_mut(self: &mut GemStore): &mut TreasuryCap<GEM> {
+        &mut self.gem_treasury
     }
-
 
     #[test_only]
     public fun init_for_test(ctx: &mut TxContext) {

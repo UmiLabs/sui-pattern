@@ -83,6 +83,9 @@ module counter::test_counter {
         test.next_tx(BOB); {
             let mut policy = test.take_shared<TokenPolicy<GEM>>();
             let mut gem = test.take_from_address<Token<GEM>>(BOB);
+
+            debug::print(&policy);
+
             assert!(gem.value() == 30, 1234);
 
             let pay = gem.split(10, test.ctx());
