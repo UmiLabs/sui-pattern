@@ -1,11 +1,10 @@
 [package]
 edition = "2024.alpha"
 name = "Alert"
-published-at = "0x6c51a8097017e2a423e6dab49170a5695ca389ac26143c5622a5cfdbbe969ace"
+published-at = "0x12bcd1e69ec3091c4aad89d3cb0cb6d5b96cbe4a0c98ea6fb10ab967672666d8"
 
 [dependencies]
-Sui = {git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "framework/testnet"}
+Sui = {git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "framework/mainnet"}
 
 [addresses]
-# alert = "0x0"
-alert = "0x6c51a8097017e2a423e6dab49170a5695ca389ac26143c5622a5cfdbbe969ace"
+alert = "0x12bcd1e69ec3091c4aad89d3cb0cb6d5b96cbe4a0c98ea6fb10ab967672666d8"
